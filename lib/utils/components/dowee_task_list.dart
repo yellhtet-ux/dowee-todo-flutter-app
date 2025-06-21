@@ -1,10 +1,10 @@
-import 'package:dowee_app/model/task_model.dart';
+import 'package:dowee_app/model/task.dart';
 import 'package:flutter/material.dart';
 
 class DoweeTaskList extends StatelessWidget {
   final String? taskTitle;
-  final TaskStatus? taskStatus;
-  final ValueChanged<TaskStatus?>? onStatusChanged;
+  final String? taskStatus;
+  final ValueChanged<String?>? onStatusChanged;
 
   const DoweeTaskList({
     super.key,
@@ -24,36 +24,53 @@ class DoweeTaskList extends StatelessWidget {
         child: Row(
           spacing: 15.0,
           children: [
+            //* Task Title */
             Text(taskTitle ?? "No Title"),
 
+            //* Spacer */
             const Spacer(),
 
+            //* Task Status Dropdown */
             DropdownButton(
-              items: const [
+              items: [
                 DropdownMenuItem(
-                  child: Text("In Progress"),
+                  child: Text(TaskStatus.inProgress),
                   value: TaskStatus.inProgress,
                 ),
                 DropdownMenuItem(
-                  child: Text("Completed"),
+                  child: Text(TaskStatus.completed),
                   value: TaskStatus.completed,
                 ),
                 DropdownMenuItem(
-                  child: Text("On Hold"),
+                  child: Text(TaskStatus.onHold),
                   value: TaskStatus.onHold,
                 ),
                 DropdownMenuItem(
-                  child: Text("Cancelled"),
+                  child: Text(TaskStatus.cancelled),
                   value: TaskStatus.cancelled,
+                ),
+                DropdownMenuItem(
+                  child: Text(TaskStatus.toDo),
+                  value: TaskStatus.toDo,
                 ),
               ],
               value: taskStatus,
               onChanged: onStatusChanged,
+              style: TextStyle(color: Colors.black,fontWeight: FontWeight.w500),
+              underline: SizedBox(),
+              borderRadius: BorderRadius.circular(12.0),
             ),
           ],
         ),
         decoration: BoxDecoration(
-          color: Colors.green,
+          color: taskStatus == TaskStatus.inProgress
+              ? Colors.yellow
+              : taskStatus == TaskStatus.completed
+              ? Colors.green
+              : taskStatus == TaskStatus.onHold
+              ? Colors.orange
+              : taskStatus == TaskStatus.toDo 
+              ? Colors.grey : Colors.red,
           borderRadius: BorderRadius.circular(12.0),
         ),
       ),
