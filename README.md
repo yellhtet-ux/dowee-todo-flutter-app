@@ -1,16 +1,48 @@
-# dowee_app
+# 📝 DooWee
 
-A new Flutter project.
+**DooWee** is a sleek, offline-first **To-Do List** app built with [Flutter](https://flutter.dev/) and [Hive](https://docs.hivedb.dev/). It helps users manage tasks efficiently, with support for task status tracking. No internet required — your tasks are stored locally on your device.
 
-## Getting Started
+> 🚀 More cool features are coming soon to help you stay organized and productive!
 
-This project is a starting point for a Flutter application.
+---
 
-A few resources to get you started if this is your first Flutter project:
+## ✨ Features
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- 🗃️ **Offline Task Storage** with Hive
+- ✅ **Task Status Tracking**  
+  (`In Progress`, `Completed`, `On Hold`, `Cancelled`)
+- 🌓 Lightweight and responsive **Flutter UI**
+- 🔒 No sign-in or internet required — your data stays on your device
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+---
+
+## 📱 Screenshots
+
+<!-- Add screenshots in /assets/screenshots/ and link below -->
+<!-- Example:
+![Home Screen](assets/screenshots/home.png)
+![Task List](assets/screenshots/task_list.png)
+-->
+
+> Screenshots coming soon...
+
+---
+
+## 🔧 Getting Started (for Developers)
+
+To clone and run DooWee locally:
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/username/projectname.git
+cd projectname
+```
+### 2. Install Flutter packages
+```bash
+flutter pub get
+```
+
+### 3. Run the app
+```bash
+flutter run
