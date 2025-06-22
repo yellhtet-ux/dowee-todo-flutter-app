@@ -25,14 +25,6 @@ enum TaskStatus {
   }
 }
 
-// class TaskStatus {
-//   static final inProgress = "In Progress";
-//   static final completed = "Completed";
-//   static final onHold = "On Hold";
-//   static final cancelled = "Cancelled";
-//   static final toDo = "To Do";
-// }
-
 @HiveType(typeId: 1, adapterName: "TaskAdapter")
 class Task {
   Task({required this.taskName, required this.taskStatus});
