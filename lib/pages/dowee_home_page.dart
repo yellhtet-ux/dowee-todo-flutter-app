@@ -80,9 +80,12 @@ class _DoweeHomePageState extends State<DoweeHomePage> {
                               child: Text(
                                 categoryTitle,
                                 style: TextStyle(
-                                  color: categoryTitle == TaskStatus.inProgress.name
+                                  color:
+                                      categoryTitle ==
+                                          TaskStatus.inProgress.name
                                       ? Colors.yellow
-                                      : categoryTitle == TaskStatus.completed.name
+                                      : categoryTitle ==
+                                            TaskStatus.completed.name
                                       ? Colors.green
                                       : categoryTitle == TaskStatus.onHold.name
                                       ? Colors.orange
@@ -110,6 +113,9 @@ class _DoweeHomePageState extends State<DoweeHomePage> {
                             categoryTitle,
                           );
                         },
+                        onDelete: ((context) {
+                          _deleteTask(index,categoryTitle);
+                        }),
                       ),
                     ),
                   ],
@@ -117,7 +123,7 @@ class _DoweeHomePageState extends State<DoweeHomePage> {
               }).toList(),
             ),
       floatingActionButton: FloatingActionButton(
-        onPressed: createNewTaskDialogHandler,
+        onPressed: _createNewTaskDialogHandler,
         child: Icon(Icons.add),
         backgroundColor: Theme.of(context).colorScheme.onPrimary,
       ),
@@ -137,7 +143,7 @@ extension _DoweeHomePageStateExt on _DoweeHomePageState {
     String categoryTitle,
   ) {
     setState(() {
-      db.updateTaskStatausChangedDBData(
+      db.updateTaskStatusChangedDBData(
         selectedStatus,
         index,
         selectedTask,
@@ -146,8 +152,15 @@ extension _DoweeHomePageStateExt on _DoweeHomePageState {
     });
   }
 
+  //! Delete Task Action
+  void _deleteTask(int index,String? categoryTitle) {
+    setState(() {
+      db.deleteTask(index,categoryTitle);
+    });
+  }
+
   //! Create New Task Action
-  void createNewTask(BuildContext context) {
+  void _createNewTask(BuildContext context) {
     setState(() {
       db.updateDBData(
         _selectedNewTaskStatus ?? "",
@@ -161,26 +174,20 @@ extension _DoweeHomePageStateExt on _DoweeHomePageState {
     Navigator.of(context).pop(); //? Dismiss the diague
   }
 
-  //! New Task Status Change
-  void newTaskStatusChanded(String? status) {
-    setState(() {
-      _selectedNewTaskStatus = status;
-    });
-  }
-
   //! To create new task
-  void createNewTaskDialogHandler() {
+  void _createNewTaskDialogHandler() {
     showDialog(
       context: context,
       builder: (context) {
+        _newTaskTFController.clear(); // Clear the text where dialog appear
         return NewTaskDialogBox(
           newTaskTFController: _newTaskTFController,
           addNewTaskOnPressed: () {
-            createNewTask(context);
+            _createNewTask(context);
           },
           cancelPressed: () => Navigator.of(context).pop(),
-          statusChangePressed: (value) {
-            newTaskStatusChanded(value);
+          statusChangePressed: (status) {
+            _selectedNewTaskStatus = status;
           },
           taskStatus: _selectedNewTaskStatus,
         );

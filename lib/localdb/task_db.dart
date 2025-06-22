@@ -10,15 +10,11 @@ class TaskDatabase {
   void loadDBData() {
     final Map? rawData = dooWeeBox.get(toDoBoxKey);
 
-    print("DEBUG:: RAW HIVE DATA: $rawData");
-
     if (rawData is Map) {
       toDoList = rawData.map<String, List<Task>>((key, value) {
         return MapEntry(key as String, List<Task>.from(value));
       });
     }
-
-    print("DEBUG:: LOADED TO DO LIST: $toDoList");
   }
 
   //! Update the database
@@ -28,11 +24,10 @@ class TaskDatabase {
     }
     toDoList[status]!.add(newTask);
     dooWeeBox.put(toDoBoxKey, toDoList);
-    print("DEBUG:: SAVED TO DO LIST $toDoList");
     loadDBData();
   }
 
-  void updateTaskStatausChangedDBData(
+  void updateTaskStatusChangedDBData(
     String? selectedStatus,
     int index,
     Task selectedTask,
@@ -47,6 +42,12 @@ class TaskDatabase {
     toDoList[selectedStatus]!.add(
       Task(taskName: selectedTask.taskName, taskStatus: selectedStatus),
     );
+    dooWeeBox.put(toDoBoxKey, toDoList);
+    loadDBData();
+  }
+
+  void deleteTask(int index,String? categoryTitle) {
+    toDoList[categoryTitle]?.removeAt(index) ?? [];
     dooWeeBox.put(toDoBoxKey, toDoList);
     loadDBData();
   }
