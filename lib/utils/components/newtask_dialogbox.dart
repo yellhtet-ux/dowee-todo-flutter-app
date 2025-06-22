@@ -1,4 +1,4 @@
-// ignore_for_file: sized_box_for_whitespace
+// ignore_for_file: sized_box_for_whitespace, no_leading_underscores_for_local_identifiers
 
 import 'package:dowee_app/model/task.dart';
 import 'package:dowee_app/utils/components/custom_button.dart';
@@ -21,94 +21,104 @@ class NewTaskDialogBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      backgroundColor: Colors.white,
-      content: Container(
-        height: 230,
-        child: Padding(
-          padding: const EdgeInsets.only(top: 15.0),
-          child: Column(
-            spacing: 20.0,
-            children: [
-              //! New Task Text Field
-              TextField(
-                controller: newTaskTFController,
-                decoration: InputDecoration(
-                  hintText: "Just add a new Task..",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12.0),
-                  ),
-                ),
-              ),
-
-              //! Status Dropdown
-              Container(
-                padding: EdgeInsets.only(left: 5,right: 5),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12.0),
-                  border: BoxBorder.all(color: Colors.black),
-                ),
-                child: DropdownButton(
-                  items: [
-                    DropdownMenuItem(
-                      child: Text(TaskStatus.inProgress),
-                      value: TaskStatus.inProgress,
-                    ),
-                    DropdownMenuItem(
-                      child: Text(TaskStatus.completed),
-                      value: TaskStatus.completed,
-                    ),
-                    DropdownMenuItem(
-                      child: Text(TaskStatus.onHold),
-                      value: TaskStatus.onHold,
-                    ),
-                    DropdownMenuItem(
-                      child: Text(TaskStatus.cancelled),
-                      value: TaskStatus.cancelled,
-                    ),
-                    DropdownMenuItem(
-                      child: Text(TaskStatus.toDo),
-                      value: TaskStatus.toDo,
-                    ),
-                  ],
-                  value: taskStatus,
-                  onChanged: statusChangePressed,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.w500,
-                  ),
-                  underline: SizedBox(),
-                  borderRadius: BorderRadius.circular(12.0),
-                ),
-              ),
-
-              // Buttons
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                spacing: 5.0,
-                //! Add Task Btn
+    String? _selectedStatus = taskStatus;
+    return StatefulBuilder(
+      builder: (BuildContext context, StateSetter setState) {
+        return AlertDialog(
+          backgroundColor: Colors.white,
+          content: Container(
+            height: 230,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 15.0),
+              child: Column(
+                spacing: 20.0,
                 children: [
-                  CustomButton(
-                    btnName: "Add Task",
-                    btnAction: addNewTaskOnPressed,
-                    backgroundColor: Colors.black,
-                    foregroundColor: Colors.white,
+                  //! New Task Text Field
+                  TextField(
+                    controller: newTaskTFController,
+                    decoration: InputDecoration(
+                      hintText: "Just add a new Task..",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12.0),
+                      ),
+                    ),
                   ),
 
-                  //! Cancel Btn
-                  CustomButton(
-                    btnName: "Cancel",
-                    btnAction: cancelPressed,
-                    backgroundColor: Colors.white,
-                    foregroundColor: Colors.black,
+                  //! Status Dropdown
+                  Container(
+                    padding: EdgeInsets.only(left: 5, right: 5),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12.0),
+                      border: BoxBorder.all(color: Colors.black),
+                    ),
+                    child: DropdownButton(
+                      items: [
+                        DropdownMenuItem(
+                          child: Text(TaskStatus.inProgress.name),
+                          value: TaskStatus.inProgress.name,
+                        ),
+                        DropdownMenuItem(
+                          child: Text(TaskStatus.completed.name),
+                          value: TaskStatus.completed.name,
+                        ),
+                        DropdownMenuItem(
+                          child: Text(TaskStatus.onHold.name),
+                          value: TaskStatus.onHold.name,
+                        ),
+                        DropdownMenuItem(
+                          child: Text(TaskStatus.cancelled.name),
+                          value: TaskStatus.cancelled.name,
+                        ),
+                        DropdownMenuItem(
+                          child: Text(TaskStatus.toDo.name),
+                          value: TaskStatus.toDo.name,
+                        ),
+                      ],
+                      value: _selectedStatus,
+                      onChanged: (value) {
+                        setState(() {
+                          _selectedStatus = value;
+                        });
+                        statusChangePressed?.call(value);
+                      },
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      underline: SizedBox(),
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
+                  ),
+
+                  // Buttons
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    spacing: 5.0,
+                    //! Add Task Btn
+                    children: [
+                      CustomButton(
+                        btnName: "Add Task",
+                        btnAction: addNewTaskOnPressed,
+                        backgroundColor: Colors.black,
+                        foregroundColor: Colors.white,
+                      ),
+
+                      //! Cancel Btn
+                      CustomButton(
+                        btnName: "Cancel",
+                        btnAction: cancelPressed,
+                        backgroundColor: Colors.white,
+                        foregroundColor: Colors.black,
+                      ),
+                    ],
                   ),
                 ],
               ),
-            ],
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

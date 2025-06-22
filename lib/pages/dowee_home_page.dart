@@ -18,7 +18,7 @@ class _DoweeHomePageState extends State<DoweeHomePage> {
   TaskDatabase db = TaskDatabase();
 
   //! Selected Status State
-  String? _selectedNewTaskStatus;
+  String? _selectedNewTaskStatus = TaskStatus.toDo.name;
 
   //! New Task Text Field Controlelr
   final _newTaskTFController = TextEditingController();
@@ -80,13 +80,13 @@ class _DoweeHomePageState extends State<DoweeHomePage> {
                               child: Text(
                                 categoryTitle,
                                 style: TextStyle(
-                                  color: categoryTitle == TaskStatus.inProgress
+                                  color: categoryTitle == TaskStatus.inProgress.name
                                       ? Colors.yellow
-                                      : categoryTitle == TaskStatus.completed
+                                      : categoryTitle == TaskStatus.completed.name
                                       ? Colors.green
-                                      : categoryTitle == TaskStatus.onHold
+                                      : categoryTitle == TaskStatus.onHold.name
                                       ? Colors.orange
-                                      : categoryTitle == TaskStatus.toDo
+                                      : categoryTitle == TaskStatus.toDo.name
                                       ? Colors.grey
                                       : Colors.red,
                                   fontWeight: FontWeight.bold,
