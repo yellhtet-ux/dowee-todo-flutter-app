@@ -41,39 +41,46 @@ class TaskDatabase {
     if (selectedStatus == null) return;
     toDoList[categoryTitle]?.removeAt(index) ?? [];
     if (!toDoList.containsKey(selectedStatus)) {
-      toDoList[selectedStatus]!.add(selectedTask);
-    } else {
-      toDoList[selectedStatus]?.add(
+      toDoList[selectedStatus] = [];
+    }
+
+    toDoList[selectedStatus]!.add(
       Task(taskName: selectedTask.taskName, taskStatus: selectedStatus),
     );
-    }
     dooWeeBox.put(toDoBoxKey, toDoList);
     loadDBData();
   }
 }
 
 class TaskMock {
+  // ignore: unused_field
   static final Map<String, List<Task>> _mockToDoList = {
-    TaskStatus.toDo: [
-      Task(taskName: "Holla", taskStatus: TaskStatus.toDo),
-      Task(taskName: "Another Holla", taskStatus: TaskStatus.toDo),
+    TaskStatus.toDo.name: [
+      Task(taskName: "Holla", taskStatus: TaskStatus.toDo.name),
+      Task(taskName: "Another Holla", taskStatus: TaskStatus.toDo.name),
     ],
 
-    TaskStatus.inProgress: [
-      Task(taskName: "Hello", taskStatus: TaskStatus.inProgress),
-      Task(taskName: "Another Hello", taskStatus: TaskStatus.inProgress),
+    TaskStatus.inProgress.name: [
+      Task(taskName: "Hello", taskStatus: TaskStatus.inProgress.name),
+      Task(taskName: "Another Hello", taskStatus: TaskStatus.inProgress.name),
     ],
 
-    TaskStatus.completed: [
-      Task(taskName: "Mingalabar", taskStatus: TaskStatus.completed),
-      Task(taskName: "Another Mingalabar", taskStatus: TaskStatus.completed),
-      Task(taskName: "Another Mingalabar 2", taskStatus: TaskStatus.completed),
+    TaskStatus.completed.name: [
+      Task(taskName: "Mingalabar", taskStatus: TaskStatus.completed.name),
+      Task(
+        taskName: "Another Mingalabar",
+        taskStatus: TaskStatus.completed.name,
+      ),
+      Task(
+        taskName: "Another Mingalabar 2",
+        taskStatus: TaskStatus.completed.name,
+      ),
     ],
 
-    TaskStatus.onHold: [
-      Task(taskName: "Bonjour", taskStatus: TaskStatus.onHold),
-      Task(taskName: "Another Bonjour", taskStatus: TaskStatus.inProgress),
-      Task(taskName: "Another Bonjour 2", taskStatus: TaskStatus.onHold),
+    TaskStatus.onHold.name: [
+      Task(taskName: "Bonjour", taskStatus: TaskStatus.onHold.name),
+      Task(taskName: "Another Bonjour", taskStatus: TaskStatus.inProgress.name),
+      Task(taskName: "Another Bonjour 2", taskStatus: TaskStatus.onHold.name),
     ],
   };
 }

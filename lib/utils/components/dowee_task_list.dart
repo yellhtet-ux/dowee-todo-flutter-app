@@ -34,43 +34,47 @@ class DoweeTaskList extends StatelessWidget {
             DropdownButton(
               items: [
                 DropdownMenuItem(
-                  child: Text(TaskStatus.inProgress),
-                  value: TaskStatus.inProgress,
+                  child: Text(TaskStatus.inProgress.name),
+                  value: TaskStatus.inProgress.name,
                 ),
                 DropdownMenuItem(
-                  child: Text(TaskStatus.completed),
-                  value: TaskStatus.completed,
+                  child: Text(TaskStatus.completed.name),
+                  value: TaskStatus.completed.name,
                 ),
                 DropdownMenuItem(
-                  child: Text(TaskStatus.onHold),
-                  value: TaskStatus.onHold,
+                  child: Text(TaskStatus.onHold.name),
+                  value: TaskStatus.onHold.name,
                 ),
                 DropdownMenuItem(
-                  child: Text(TaskStatus.cancelled),
-                  value: TaskStatus.cancelled,
+                  child: Text(TaskStatus.cancelled.name),
+                  value: TaskStatus.cancelled.name,
                 ),
                 DropdownMenuItem(
-                  child: Text(TaskStatus.toDo),
-                  value: TaskStatus.toDo,
+                  child: Text(TaskStatus.toDo.name),
+                  value: TaskStatus.toDo.name,
                 ),
               ],
               value: taskStatus,
               onChanged: onStatusChanged,
-              style: TextStyle(color: Colors.black,fontWeight: FontWeight.w500),
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.w500,
+              ),
               underline: SizedBox(),
               borderRadius: BorderRadius.circular(12.0),
             ),
           ],
         ),
         decoration: BoxDecoration(
-          color: taskStatus == TaskStatus.inProgress
+          color: taskStatus == TaskStatus.inProgress.name
               ? Colors.yellow
-              : taskStatus == TaskStatus.completed
+              : taskStatus == TaskStatus.completed.name
               ? Colors.green
-              : taskStatus == TaskStatus.onHold
+              : taskStatus == TaskStatus.onHold.name
               ? Colors.orange
-              : taskStatus == TaskStatus.toDo 
-              ? Colors.grey : Colors.red,
+              : taskStatus == TaskStatus.toDo.name
+              ? Colors.grey
+              : Colors.red,
           borderRadius: BorderRadius.circular(12.0),
         ),
       ),

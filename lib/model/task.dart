@@ -2,22 +2,38 @@ import 'package:hive/hive.dart';
 
 part 'task.g.dart';
 
-class TaskStatus {
-  static final inProgress = "In Progress";
-  static final completed = "Completed";
-  static final onHold = "On Hold";
-  static final cancelled = "Cancelled";
-  static final toDo = "To Do";
+enum TaskStatus {
+  toDo,
+  inProgress,
+  onHold,
+  completed,
+  cancelled;
+
+  String get name {
+    switch (this) {
+      case TaskStatus.toDo:
+        return 'To Do';
+      case TaskStatus.inProgress:
+        return 'In Progress';
+      case TaskStatus.cancelled:
+        return "Cancelled";
+      case TaskStatus.completed:
+        return "Completed";
+      case TaskStatus.onHold:
+        return "On Hold";
+    }
+  }
 }
 
-// class Task {
-//   String taskName;
-//   String taskStatus;
-
-//   Task({required this.taskName, required this.taskStatus});
+// class TaskStatus {
+//   static final inProgress = "In Progress";
+//   static final completed = "Completed";
+//   static final onHold = "On Hold";
+//   static final cancelled = "Cancelled";
+//   static final toDo = "To Do";
 // }
 
-@HiveType(typeId: 1,adapterName: "TaskAdapter")
+@HiveType(typeId: 1, adapterName: "TaskAdapter")
 class Task {
   Task({required this.taskName, required this.taskStatus});
 
