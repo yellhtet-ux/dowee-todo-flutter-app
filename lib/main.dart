@@ -3,18 +3,21 @@ import 'package:dowee_app/pages/dowee_home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-late Box<Task> dooWeeBox;
+late Box dooWeeBox;
 
 const String taskBoxName = "doo-wee-box";
 
 void main() async {
+  //! Ensure all the flutter engine and framework fully initialized.
+  WidgetsFlutterBinding.ensureInitialized();
+
   //! Initialize Hive
   await Hive.initFlutter();
 
   //! Open the box
   Hive.registerAdapter<Task>(TaskAdapter());
 
-  dooWeeBox = await Hive.openBox<Task>(taskBoxName);
+  dooWeeBox = await Hive.openBox(taskBoxName);
 
   runApp(const MyApp());
 }
