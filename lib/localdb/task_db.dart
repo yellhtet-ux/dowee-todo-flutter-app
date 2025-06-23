@@ -46,8 +46,11 @@ class TaskDatabase {
     loadDBData();
   }
 
-  void deleteTask(int index,String? categoryTitle) {
+  void deleteTask(int index, String? categoryTitle) {
     toDoList[categoryTitle]?.removeAt(index) ?? [];
+    if (toDoList.values.every((task) => task.isEmpty)) {
+      toDoList.clear();
+    }
     dooWeeBox.put(toDoBoxKey, toDoList);
     loadDBData();
   }

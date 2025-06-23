@@ -23,6 +23,9 @@ class _DoweeHomePageState extends State<DoweeHomePage> {
   //! New Task Text Field Controlelr
   final _newTaskTFController = TextEditingController();
 
+  //! Total List
+  List<Task> totalList = [];
+
   @override
   void initState() {
     //! Load the data when app start
@@ -70,6 +73,7 @@ class _DoweeHomePageState extends State<DoweeHomePage> {
               children: db.toDoList.entries.map<Widget>((element) {
                 final categoryTitle = element.key;
                 final taskList = element.value;
+                this.totalList = taskList;
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -114,7 +118,7 @@ class _DoweeHomePageState extends State<DoweeHomePage> {
                           );
                         },
                         onDelete: ((context) {
-                          _deleteTask(index,categoryTitle);
+                          _deleteTask(index, categoryTitle);
                         }),
                       ),
                     ),
@@ -153,9 +157,9 @@ extension _DoweeHomePageStateExt on _DoweeHomePageState {
   }
 
   //! Delete Task Action
-  void _deleteTask(int index,String? categoryTitle) {
+  void _deleteTask(int index, String? categoryTitle) {
     setState(() {
-      db.deleteTask(index,categoryTitle);
+      db.deleteTask(index, categoryTitle);
     });
   }
 
