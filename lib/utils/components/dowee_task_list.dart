@@ -34,16 +34,15 @@ class DoweeTaskList extends StatelessWidget {
         ),
         child: Container(
           padding: EdgeInsets.only(left: 10.0),
-          height: 50.0,
           width: double.infinity,
           child: Row(
             spacing: 15.0,
             children: [
               //* Task Title */
-              Text(taskTitle ?? "No Title"),
+              Expanded(child: Text(taskTitle ?? "No Title")),
 
               //* Spacer */
-              const Spacer(),
+              // const Spacer(),
 
               //* Task Status Dropdown */
               DropdownButton(
